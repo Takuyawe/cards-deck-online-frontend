@@ -274,6 +274,7 @@ function RootLayout({ children }) {
         children: [
             /*#__PURE__*/ jsx_runtime_.jsx(Head, {}),
             /*#__PURE__*/ jsx_runtime_.jsx("body", {
+                id: "app",
                 className: (layout_tsx_import_Inter_arguments_subsets_latin_variableName_inter_default()).className,
                 children: /*#__PURE__*/ jsx_runtime_.jsx(e0, {
                     children: children

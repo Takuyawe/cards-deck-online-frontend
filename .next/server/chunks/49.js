@@ -669,7 +669,7 @@ function CicleMenuComponent() {
     const handleLogoutClick = ()=>{
         router.push("/");
     };
-    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
         children: [
             /*#__PURE__*/ jsx_runtime_.jsx(MenuContainerBox, {
                 children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)(AnimatedList, {

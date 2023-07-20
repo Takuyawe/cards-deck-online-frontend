@@ -88,7 +88,7 @@ export default function CicleMenuComponent () {
   }
 
   return (
-    <div>
+    <>
       <MenuContainerBox>
         <AnimatedList className={openSettings ? 'open' : 'closed'}>
           <AnimatedListItemMenu disablePadding className={`bg-gray-100 hover:bg-gray-300 ${openSettings ? 'open' : 'closed'}`}>
@@ -150,6 +150,6 @@ export default function CicleMenuComponent () {
           </>
         </Modal>
       )}
-    </div>
+    </>
   );
 };

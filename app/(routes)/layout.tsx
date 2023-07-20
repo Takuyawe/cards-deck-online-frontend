@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head />
-      <body className={inter.className}>
+      <body id="app" className={inter.className}>
         {/* <Header /> */}
         <SocketContextProvider>
           {children}

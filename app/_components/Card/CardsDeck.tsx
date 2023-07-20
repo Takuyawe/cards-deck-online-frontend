@@ -87,7 +87,7 @@ const CardComponent: React.FC<{card: Card}> = ({ card }) => {
             <div className="z-999 absolute">
                 <div onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove} style={{ transform: `rotate(${rotation}deg)` }}>
                     {card.isFlipped ? (
-                        <Image src={card.getImage()} alt="Card Image" width={50} height={75} draggable={false} priority={true}  />
+                        <Image src={card.getImage()} alt="Card Image" width={50} height={75} draggable={false} loading="eager"  />
                     ) : (
                         <Image src="/cards_images/back.jpg" alt="Card Image" width={50} height={75} draggable={false} />
                     )}
@@ -124,6 +124,7 @@ const CardsDeck: React.FC = () => {
         })
 
         socketRef.current?.on("multiPlayerSettings", data => {
+            console.log(data)
             setMultiPlayerSettings(data)
         })
 
@@ -132,20 +133,24 @@ const CardsDeck: React.FC = () => {
         })
     
         socketRef.current?.on('deckReset', data => {
+            console.log(data)
             const deck = Deck.deckFromSocket(data)
             setDeck(deck)
         })
 
         socketRef.current?.on("ownerUpdated", data => {
+            console.log(data)
             updateDeck(data)
         })
 
         socketRef.current?.on('cardPositionUpdated', data => {
+            console.log(data)
             updateDeck(data)
 
         })
 
         socketRef.current?.on('cardFlipped', data => {
+            console.log(data)
             updateDeck(data)
 
         })

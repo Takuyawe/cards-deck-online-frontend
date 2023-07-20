@@ -70,6 +70,8 @@ export default function CicleMenuComponent () {
   const [openMultiPlayer, setOpenMultiPlayer] = useState(false)
   const [openSettings, setOpenSettings] = useState(false)
   const {socketRef} = useSocketContext()
+  const router = useRouter()
+  const pathname = usePathname()
 
   const handleMultiPlayerOpen = () => setOpenMultiPlayer(true)
   const handleMultiPlayerClose = () => setOpenMultiPlayer(false)
@@ -77,11 +79,9 @@ export default function CicleMenuComponent () {
   const handleMenuClick = () => {
     setOpenSettings(!openSettings)
   }
-  
-  const router = useRouter()
-  const pathname = usePathname()
 
   const handleSettingsClick = () => {
+    if (pathname === "/") return
     router.push(`${pathname}/settings`)
   }
 

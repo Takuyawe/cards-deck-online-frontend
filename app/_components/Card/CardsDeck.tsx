@@ -98,8 +98,7 @@ const CardComponent: React.FC<{card: Card}> = ({ card }) => {
 }
 
 const CardsDeck: React.FC = () => {
-    const [isDeckBoxVisible, setIsDeckBoxVisible] = useState(true)
-    const {socketRef, deck, setDeck, multiPlayerSettings, setMultiPlayerSettings} = useSocketContext()
+    const {socketRef, deck, setDeck, isDeckBoxVisible, setIsDeckBoxVisible, multiPlayerSettings, setMultiPlayerSettings} = useSocketContext()
 
     const handleDeckBoxClick = () => {
         setIsDeckBoxVisible(false)

@@ -51,6 +51,9 @@ interface ContextProps {
     setMultiPlayerSettings: React.Dispatch<React.SetStateAction<MultiPlayerSettings>>
     singleModeSettings: SingleModeSettings
     setSingleModeSettings: React.Dispatch<React.SetStateAction<SingleModeSettings>>
+    isDeckBoxVisible: boolean
+    setIsDeckBoxVisible: React.Dispatch<React.SetStateAction<boolean>>
+    
 }
 
 const SocketContext = createContext<ContextProps | undefined>(undefined)
@@ -60,6 +63,8 @@ export const SocketContextProvider: React.FC<{children: ReactNode}> = ({children
     const [multiPlayerSettings, setMultiPlayerSettings] = useState(defaultMultiPlayerSettings)
     const [singleModeSettings, setSingleModeSettings] = useState(defaultSingleModeSettings)
     const [deck, setDeck] = useState(new Deck().shuffle());
+    const [isDeckBoxVisible, setIsDeckBoxVisible] = useState(true)
+
 
     useEffect(() => {
         socketRef.current = io("https://cards-deck-online-8a294773806f.herokuapp.com", {autoConnect: false})
@@ -72,7 +77,7 @@ export const SocketContextProvider: React.FC<{children: ReactNode}> = ({children
     }, [])
 
     return (
-        <SocketContext.Provider value={{socketRef, deck, setDeck, multiPlayerSettings, setMultiPlayerSettings, singleModeSettings, setSingleModeSettings}}>
+        <SocketContext.Provider value={{socketRef, deck, setDeck, multiPlayerSettings, setMultiPlayerSettings, singleModeSettings, setSingleModeSettings, isDeckBoxVisible, setIsDeckBoxVisible}}>
             {children}
         </SocketContext.Provider>
     )

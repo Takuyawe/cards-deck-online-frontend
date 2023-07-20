@@ -21,7 +21,7 @@ interface Props {
 }
 
 export default function ResetPopupComponent (props: Props) {
-    const {socketRef, deck, setDeck} = useSocketContext()
+    const {socketRef, deck, setDeck, setIsDeckBoxVisible} = useSocketContext()
     const [isShuffle, setIsShuffle] = useState(false)
 
     const handleReset = () => {
@@ -39,6 +39,7 @@ export default function ResetPopupComponent (props: Props) {
                 return newDeck 
             }
         })
+        setIsDeckBoxVisible(true)
         props.setResetPopup(false);
     }
 

@@ -33,6 +33,7 @@ const MainButton = styled(Button)`
 
 const MultiPlayerModeText = styled(Typography)`
     font-size: 1.75rem;
+    color: #FFFFFF;
 `
 
 const MainTextField = styled(TextField)`
@@ -76,7 +77,7 @@ export default function MultiPlayerComponent () {
 
     return (
         <MainBox>
-            <Image src="/modal_image.png" alt="modal image" width={400} height={400} unoptimized />
+            <Image src="/modal_image.png" alt="modal image" fill />
             <div style={{position: "absolute", top: "7%", textAlign: "center", width: 400, height: 380}}>
                 <Grid container>
                     <Grid item xs={12} sx={{marginBottom: "1.75rem"}}>

@@ -19,6 +19,7 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 import MultiPlayerComponent from './MultiPlayerMenu/MultiPlayerMenu';
 import { usePathname, useRouter } from 'next/navigation';
+import { useSocketContext } from '@/app/_context/socket';
 
 const MenuContainerBox = styled(Box)`
   position: absolute;
@@ -68,6 +69,7 @@ const AnimatedListItem = styled(ListItem)`
 export default function CicleMenuComponent () {
   const [openMultiPlayer, setOpenMultiPlayer] = useState(false)
   const [openSettings, setOpenSettings] = useState(false)
+  const {socketRef} = useSocketContext()
 
   const handleMultiPlayerOpen = () => setOpenMultiPlayer(true)
   const handleMultiPlayerClose = () => setOpenMultiPlayer(false)
@@ -85,6 +87,7 @@ export default function CicleMenuComponent () {
 
   const handleLogoutClick = () => {
     router.push("/")
+    socketRef.current?.disconnect()
   }
 
   return (

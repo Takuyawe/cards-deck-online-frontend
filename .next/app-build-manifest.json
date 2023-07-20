@@ -1,15 +1,52 @@
 {
   "pages": {
-    "/(routes)/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(routes)/page.js"
-    ],
     "/(routes)/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/(routes)/layout.css",
-      "static/chunks/app/(routes)/layout.js"
+      "static/chunks/webpack-c2097bc10b29398e.js",
+      "static/chunks/bce60fc1-3796239d190b3b86.js",
+      "static/chunks/769-2dd4d8973c7875b0.js",
+      "static/chunks/main-app-0bdaf1ec508f0c81.js",
+      "static/chunks/522-66926d64eacd9524.js",
+      "static/css/d3bde1214a78aaaa.css",
+      "static/chunks/app/(routes)/layout-31efb604af6a7bb7.js"
+    ],
+    "/(routes)/page": [
+      "static/chunks/webpack-c2097bc10b29398e.js",
+      "static/chunks/bce60fc1-3796239d190b3b86.js",
+      "static/chunks/769-2dd4d8973c7875b0.js",
+      "static/chunks/main-app-0bdaf1ec508f0c81.js",
+      "static/chunks/522-66926d64eacd9524.js",
+      "static/chunks/4-d224dbb6cbf06340.js",
+      "static/chunks/443-af91ce6ae19c9d67.js",
+      "static/chunks/391-80de0ebb9201ef4c.js",
+      "static/chunks/app/(routes)/page-780bf47c306e0549.js"
+    ],
+    "/(routes)/test/page": [
+      "static/chunks/webpack-c2097bc10b29398e.js",
+      "static/chunks/bce60fc1-3796239d190b3b86.js",
+      "static/chunks/769-2dd4d8973c7875b0.js",
+      "static/chunks/main-app-0bdaf1ec508f0c81.js",
+      "static/chunks/522-66926d64eacd9524.js",
+      "static/chunks/app/(routes)/test/page-c871f624e6a9480d.js"
+    ],
+    "/(routes)/[roomId]/page": [
+      "static/chunks/webpack-c2097bc10b29398e.js",
+      "static/chunks/bce60fc1-3796239d190b3b86.js",
+      "static/chunks/769-2dd4d8973c7875b0.js",
+      "static/chunks/main-app-0bdaf1ec508f0c81.js",
+      "static/chunks/522-66926d64eacd9524.js",
+      "static/chunks/4-d224dbb6cbf06340.js",
+      "static/chunks/443-af91ce6ae19c9d67.js",
+      "static/chunks/391-80de0ebb9201ef4c.js",
+      "static/chunks/app/(routes)/[roomId]/page-e550e5a4cbdc81f1.js"
+    ],
+    "/(routes)/[roomId]/settings/page": [
+      "static/chunks/webpack-c2097bc10b29398e.js",
+      "static/chunks/bce60fc1-3796239d190b3b86.js",
+      "static/chunks/769-2dd4d8973c7875b0.js",
+      "static/chunks/main-app-0bdaf1ec508f0c81.js",
+      "static/chunks/522-66926d64eacd9524.js",
+      "static/chunks/4-d224dbb6cbf06340.js",
+      "static/chunks/app/(routes)/[roomId]/settings/page-edf69fa58b9c9151.js"
     ]
   }
 }

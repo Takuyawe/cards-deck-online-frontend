@@ -1,3 +1,7 @@
 {
-  "/(routes)/page": "app/(routes)/page.js"
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/(routes)/page": "app/(routes)/page.js",
+  "/(routes)/test/page": "app/(routes)/test/page.js",
+  "/(routes)/[roomId]/page": "app/(routes)/[roomId]/page.js",
+  "/(routes)/[roomId]/settings/page": "app/(routes)/[roomId]/settings/page.js"
 }

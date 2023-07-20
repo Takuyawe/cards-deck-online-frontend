@@ -62,8 +62,8 @@ export const SocketContextProvider: React.FC<{children: ReactNode}> = ({children
     const [deck, setDeck] = useState(new Deck().shuffle());
 
     useEffect(() => {
-        // socketRef.current = io("https://cards-deck-online-8a294773806f.herokuapp.com", {autoConnect: false})
-        socketRef.current = io("http://localhost:8000", {autoConnect: false})
+        socketRef.current = io("https://cards-deck-online-8a294773806f.herokuapp.com", {autoConnect: false})
+        // socketRef.current = io("http://localhost:8000", {autoConnect: false})
 
         return () => {
             socketRef.current?.disconnect()

@@ -2,7 +2,8 @@ enum Suit {
     Clubs,
     Spades,
     Hearts,
-    Diamonds
+    Diamonds,
+    Joker
 }
 
 enum CardNumber {
@@ -18,7 +19,8 @@ enum CardNumber {
     Ten,
     Jack,
     Queen,
-    King
+    King,
+    Joker
 }
 
 enum CardType {
@@ -40,8 +42,7 @@ export class Card {
     position: CardPosition;
     owner: string | null;
 
-    // todo: position adjustment
-    constructor(suit: Suit, number: CardNumber, cardType: CardType, isFlipped = false, position = {x: 445, y: 360}, owner = null) {
+    constructor(suit: Suit, number: CardNumber, cardType: CardType, isFlipped = false, position = {x: 720, y: 410}, owner = null) {
         this.suit = suit
         this.number = number
         this.cardType = cardType

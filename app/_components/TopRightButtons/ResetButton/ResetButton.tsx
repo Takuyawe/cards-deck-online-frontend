@@ -31,7 +31,7 @@ export default function ResetPopupComponent (props: Props) {
                 return new Deck().shuffle()
             } else {
                 const newDeckCards = prevDeck.cards.map(card => 
-                    new Card(card.suit, card.number, card.cardType, false, {x: 445, y: 360})
+                    new Card(card.suit, card.number, card.cardType, false, {x: 720, y: 410})
                 )
                 const newDeck = new Deck(newDeckCards)
                 console.log(newDeck)

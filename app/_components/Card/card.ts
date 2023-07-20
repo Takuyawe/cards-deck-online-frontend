@@ -80,8 +80,8 @@ export class Deck {
         if (cards) {
             this.cards = cards
         } else {
-            for (let suit = 0; suit < Object.keys(Suit).length / 2; suit++) {
-                for (let number = 0; number < Object.keys(CardNumber).length / 2; number++) {
+            for (let suit = 0; suit < Object.keys(Suit).length / 2 - 1; suit++) {
+                for (let number = 0; number < Object.keys(CardNumber).length / 2 - 1; number++) {
                     this.cards.push(new Card(suit, number, CardType.Regular))
                 }
             }

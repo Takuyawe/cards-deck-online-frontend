@@ -107,7 +107,7 @@ const CardsDeck: React.FC = () => {
 
     const updateDeck = (data: any) => {
         // todo: why data: Card is throwing an error?
-        const updatedCard = new Card(data.suit, data.number, data.isFlipped, data.position, data.owner)
+        const updatedCard = new Card(data.suit, data.number, data.cardType, data.isFlipped, data.position, data.owner)
         setDeck(prevDeck => {
             const newDeckCards = prevDeck.cards.map(card =>
                 card.suit === updatedCard.suit && card.number === updatedCard.number && card.cardType === updatedCard.cardType ? updatedCard : card

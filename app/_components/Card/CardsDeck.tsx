@@ -146,7 +146,6 @@ const CardsDeck: React.FC = () => {
         socketRef.current?.on('cardPositionUpdated', data => {
             console.log(data)
             updateDeck(data)
-
         })
 
         socketRef.current?.on('cardFlipped', data => {

@@ -100,9 +100,9 @@ const CardComponent: React.FC<{card: Card}> = ({ card }) => {
             <div className="z-999 absolute">
                 <div onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove} style={{ transform: `rotate(${rotation}deg)` }}>
                     {card.isFlipped ? (
-                        <Image src={card.getImage()} alt="Card Image" width={50} height={75} draggable={false}  />
+                        <Image src={card.getImage()} alt="Card Image" width={75} height={100} draggable={false}  />
                     ) : (
-                        <Image src="/cards_images/back.jpg" alt="Card Image" width={50} height={75} draggable={false} />
+                        <Image src="/cards_images/back.jpg" alt="Card Image" width={75} height={100} draggable={false} />
                     )}
                 </div>
             </div>
@@ -171,8 +171,8 @@ const CardsDeck: React.FC = () => {
     return (
         <> 
             {isDeckBoxVisible && (
-                <div className="absolute" style={{top: "47.6%", left: "49.5%"}}>
-                    <fieldset className="border-2 rounded w-16 h-24">
+                <div className="absolute" style={{top: "47%", left: "49.25%"}}>
+                    <fieldset className="border-2 rounded w-24 h-36">
                         <legend>Deck</legend>
                         <div className="text-center">
                             <IconButton onClick={handleDeckBoxClick}>

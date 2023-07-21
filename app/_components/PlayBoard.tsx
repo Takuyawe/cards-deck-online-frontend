@@ -5,7 +5,7 @@ import TopRightButtonsComponent from './TopRightButtons/TopRightButtonsComponent
 
 export default function PlayBoard() {
   return (
-    <div className="relative w-screen h-screen">
+    <div className="relative w-screen h-screen overflow-hidden">
       <Image src="/casino_table.jpg" alt="table" fill style={{ objectFit: "cover", zIndex: -999}} />
       <CardsDeck />
       <CircleMenuComponent />

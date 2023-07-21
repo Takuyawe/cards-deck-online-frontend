@@ -72,7 +72,13 @@
   * {
     @apply border-border;
   }
+
+  html,
   body {
-    @apply bg-background text-foreground;
+    @apply p-0 m-0 h-full w-full overflow-auto;
+  }
+
+  body {
+    @apply box-border bg-background text-foreground;
   }
 }

@@ -84,7 +84,7 @@ export default function DeckSettingsComponent (props: Props) {
             </Grid>
             <Grid item xs={12}>
                 <div className="flex flex-row items-center justify-end mt-8">
-                    <Button onClick={handleCancelClick} variant="contained" sx={{border: "1px solid rgba(255, 255, 255, .25)"}} className="mr-4 hover:bg-gray-800">Cancel</Button>
+                    <Button onClick={handleCancelClick} variant="contained" className="border border-white border-opacity-25 mr-4 hover:bg-gray-800">Cancel</Button>
                     <Button onClick={handleSettingsSave} variant="contained" className="bg-blue-600 hover:bg-blue-500">Save</Button>
                 </div>
             </Grid>

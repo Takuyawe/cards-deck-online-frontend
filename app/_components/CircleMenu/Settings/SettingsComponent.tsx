@@ -127,7 +127,7 @@ export default function SettingsComponent (props: Props) {
                                 )}
                                 {selectedSetting !== "MultiPlayer Room" && (      
                                     <div className="flex flex-row items-center justify-end mt-8">
-                                        <Button variant="contained" sx={{border: "1px solid rgba(255, 255, 255, .25)"}} className="mr-4 hover:bg-gray-800">Cancel</Button>
+                                        <Button variant="contained" sx={{border: "1px solid rgba(255, 255, 255, .25)"}} className="border border-white border-opacity-25 mr-4 hover:bg-gray-800">Cancel</Button>
                                         <Button variant="contained" className="bg-blue-600 hover:bg-blue-500">Save</Button>
                                     </div>
                                 )}

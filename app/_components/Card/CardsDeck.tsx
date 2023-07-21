@@ -15,6 +15,19 @@ const CardComponent: React.FC<{card: Card}> = ({ card }) => {
     const [rotation, setRotation] = useState(0);
     const [isNotDraggable, setIsNotDraggable] = useState(false)
     const {socketRef, setDeck} = useSocketContext()
+    // const [cardPosition, setCardPosition] = useState({x: 0, y: 0})
+
+    // useEffect(() => {
+    //     setCardPosition({x: window.innerWidth / 2, y: window.innerHeight / 2})
+
+    //     window.addEventListener("resize", () => {
+    //         setCardPosition({x: window.innerWidth / 2, y: window.innerHeight / 2})
+    //     }) 
+    // }, [])
+
+    // 821, 1440
+    // 410.5, 720
+    // 720, 410
 
     const handleMouseDown = (e: React.MouseEvent): void => {
         setDragStart({x: e.clientX, y: e.clientY});
@@ -83,7 +96,7 @@ const CardComponent: React.FC<{card: Card}> = ({ card }) => {
     }
     
     return (
-        <Draggable onStart={handleDragStart} onStop={handleDragStop} onDrag={handleDrag} disabled={isNotDraggable} position={card.position}>  
+        <Draggable onStart={handleDragStart} onStop={handleDragStop} onDrag={handleDrag} disabled={isNotDraggable} position={card.position} >  
             <div className="z-999 absolute">
                 <div onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove} style={{ transform: `rotate(${rotation}deg)` }}>
                     {card.isFlipped ? (

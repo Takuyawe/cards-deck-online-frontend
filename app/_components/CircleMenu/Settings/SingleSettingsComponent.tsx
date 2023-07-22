@@ -91,7 +91,6 @@ export default function SingleSettingsComponent () {
     }
 
     const handleSettingsSave = () => {
-        // todo: dialog to confirm game restart
         if (!socketRef.current?.connected) return
         socketRef.current.emit("updateMultiPlayerSettings", {
             isJokerIncluded: isJokerIncluded,

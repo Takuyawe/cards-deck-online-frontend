@@ -42,7 +42,7 @@ export class Card {
     position: CardPosition;
     owner: string | null;
 
-    constructor(suit: Suit, number: CardNumber, cardType: CardType, isFlipped = false, position = {x: 720, y: 410}, owner = null) {
+    constructor(suit: Suit, number: CardNumber, cardType: CardType, isFlipped = false, position = {x: 0, y: 0}, owner = null) {
         this.suit = suit
         this.number = number
         this.cardType = cardType

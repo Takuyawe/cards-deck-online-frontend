@@ -98,7 +98,7 @@ const CardComponent: React.FC<{card: Card}> = ({ card }) => {
     
     return (
         <Draggable onStart={handleDragStart} onStop={handleDragStop} onDrag={handleDrag} disabled={isNotDraggable} position={card.position} >  
-            <div className="z-999 absolute">
+            <div className="z-999 absolute top-1/2 left-1/2">
                 <div onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove} style={{ transform: `rotate(${rotation}deg)` }}>
                     {card.isFlipped ? (
                         <Image src={card.getImage()} alt="Card Image" width={75} height={100} draggable={false}  />

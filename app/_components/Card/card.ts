@@ -88,9 +88,10 @@ export class Deck {
         }
     }
 
-    addJokers(): void {
+    addJokers(): Deck {
         this.cards.push(new Card(Suit.Joker, CardNumber.Joker, CardType.Joker1))
         this.cards.push(new Card(Suit.Joker, CardNumber.Joker, CardType.Joker2))
+        return this
     }
 
     draw(): Card | undefined {

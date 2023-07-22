@@ -8,6 +8,11 @@ import Box from '@mui/material/Box';
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Divider from '@mui/material/Divider';
+import Alert from '@mui/material/Alert';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -18,7 +23,9 @@ import ThemeSettingsComponent from "./ThemeSettingsComponent";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+
 import { useSocketContext } from "@/app/_context/socket";
+import {Card, Deck} from "@/app/_components/Card/card"
 
 const Background = styled(Box)`
     display: flex;
@@ -73,12 +80,18 @@ interface Props {
     roomId: string
 }
 
+type ModalUserAction = {
+    onClose: (value: string) => void
+}
+
 export default function SettingsComponent (props: Props) {
-    const {socketRef, multiPlayerSettings, setMultiPlayerSettings} = useSocketContext()
+    const {socketRef, setDeck, multiPlayerSettings, setMultiPlayerSettings} = useSocketContext()
     const [selectedSetting, setSelectedSetting] = useState<string | null>("Game")
     const [isJokerIncluded, setIsJokerIncluded] = useState(multiPlayerSettings.game.isJokerIncluded)
     const [isShuffleEnabled, setIsShuffleEnabled] = useState(multiPlayerSettings.game.isShuffleEnabled)
     const [isSaveSuccess, setIsSaveSuccess] = useState(false)
+    const [resetPopup, setResetPopup] = useState(false)
+    const [modalUserAction, setModalUserAction] = useState<ModalUserAction | undefined>()
     const router = useRouter()
 
     const handleChangeSettings = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -94,8 +107,40 @@ export default function SettingsComponent (props: Props) {
         setIsShuffleEnabled(multiPlayerSettings.game.isShuffleEnabled)
     }
 
-    const handleSettingsSave = () => {
-        // todo: dialog to confirm game restart
+    const resetDeck = () => {
+        setDeck(() => {
+            let newDeck;
+            if (isJokerIncluded && isShuffleEnabled) {
+                newDeck = new Deck().addJokers().shuffle()
+            } else if (isJokerIncluded && !isShuffleEnabled) {
+                newDeck = new Deck().addJokers()
+            } else if (!isJokerIncluded && isShuffleEnabled) {
+                newDeck = new Deck().shuffle()
+            } else { // !isJokerIncluded && !isShuffleEnabled
+                newDeck = new Deck()
+            }
+            if (socketRef.current) socketRef.current?.emit("resetDeck", newDeck)
+            return newDeck 
+        })
+    }
+
+    const handleSettingsSave = async () => {
+        setResetPopup(true)
+        const userAction = await new Promise<string>(resolve => {
+            setModalUserAction({
+                onClose: resolve,
+            })
+        })
+
+        setResetPopup(false)
+
+        if (userAction === "reset") {
+            console.log("Card deck will be reset!")
+        } else {
+            console.log("Settings change cancelled!")
+            return
+        }
+
         if (!socketRef.current?.connected) return
         socketRef.current.emit("updateMultiPlayerSettings", {
             isJokerIncluded: isJokerIncluded,
@@ -108,6 +153,9 @@ export default function SettingsComponent (props: Props) {
                 isShuffleEnabled: isShuffleEnabled
             }
         })
+
+        resetDeck()
+
         setIsSaveSuccess(true)
     }
 
@@ -155,8 +203,35 @@ export default function SettingsComponent (props: Props) {
                         </Grid>
                     </Grid>
                 </SettingsMain>
-
             </SettingsContainer>
+            {resetPopup && (
+                <Dialog
+                    open={resetPopup}
+                    onClose={() => modalUserAction?.onClose("close")}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    {/* <DialogTitle id="alert-dialog-title">
+                    {"Use Google's location service?"}
+                    </DialogTitle> */}
+                    <DialogContent>
+                    <DialogContentText className="text-xl" id="alert-dialog-description">
+                        Are you sure you want to change the settings?
+                    </DialogContentText>
+                    </DialogContent>
+                    <Grid container className="flex items-center justify-center">
+                        <Grid item>
+                            <Alert severity="error" variant="filled" >
+                                Changing the settings will reset the card deck
+                            </Alert>
+                        </Grid>
+                    </Grid>
+                    <DialogActions>
+                    <Button onClick={() => modalUserAction?.onClose("cancel")}>No</Button>
+                    <Button onClick={() => modalUserAction?.onClose("reset")}>Yes</Button>
+                    </DialogActions>
+                </Dialog>
+            )}
         </Background>
     )
 }

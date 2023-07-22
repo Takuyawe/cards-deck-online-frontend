@@ -5,6 +5,7 @@ import Image from "next/image"
 import {Card, Deck} from "./card"
 import Draggable, {DraggableData, DraggableEvent} from "react-draggable"
 
+import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useSocketContext } from "@/app/_context/socket"
@@ -112,6 +113,7 @@ const CardComponent: React.FC<{card: Card}> = ({ card }) => {
 
 const CardsDeck: React.FC = () => {
     const {socketRef, deck, setDeck, isDeckBoxVisible, setIsDeckBoxVisible, multiPlayerSettings, setMultiPlayerSettings} = useSocketContext()
+    const [settingsUpdated, setSettingsUpdated] = useState(false)
 
     const handleDeckBoxClick = () => {
         setIsDeckBoxVisible(false)
@@ -141,7 +143,11 @@ const CardsDeck: React.FC = () => {
         })
 
         socketRef.current?.on("multiPlayerSettingsUpdated", data => {
+            setSettingsUpdated(true)
             setMultiPlayerSettings(data)
+            setTimeout(() => {
+                setSettingsUpdated(false)
+            }, 5000)
         })
     
         socketRef.current?.on('deckReset', data => {
@@ -180,6 +186,14 @@ const CardsDeck: React.FC = () => {
                             </IconButton>
                         </div>
                     </fieldset>
+                </div>
+            )}
+            {settingsUpdated && (
+                <div className="absolute" style={{top: "10%", left: "35%"}}>
+                    <Alert severity="info" variant="filled">
+                        Other player has changed the settings.
+                        Now, the deck will be reset!
+                    </Alert>
                 </div>
             )}
             {deck.cards.map((card, index) => (            

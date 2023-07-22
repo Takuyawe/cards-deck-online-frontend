@@ -57,9 +57,9 @@ export class Card {
 
     getImage(): string {
         if (this.cardType === CardType.Joker1) {
-            return 'cards_images/Joker1.svg';
+            return 'cards_images/joker.jpg';
         } else if (this.cardType === CardType.Joker2) {
-            return 'cards_images/Joker2.svg';
+            return 'cards_images/joker2.jpg';
         } else {
             const suitName = Suit[this.suit];
             const cardNumber = CardNumber[this.number];

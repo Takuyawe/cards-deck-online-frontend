@@ -64,11 +64,11 @@ const CardComponent: React.FC<{card: Card}> = ({ card }) => {
     const handleDragStart = (e: DraggableEvent, data: DraggableData): void => {
         if (socketRef.current) {
             if (card.owner === null) {
+                setIsNotDraggable(false)
                 card.owner = socketRef.current.id
                 socketRef.current.emit("ownerDefined", card)
             } else if (card.owner !== socketRef.current.id) {
                 setIsNotDraggable(true)
-                return
             }
         }
     }
@@ -88,7 +88,7 @@ const CardComponent: React.FC<{card: Card}> = ({ card }) => {
             card.position = {x: data.x, y: data.y}
             setDeck(prevDeck => {
                 const newDeckCards = prevDeck.cards.map(prevCard => 
-                    prevCard.suit === card.suit && prevCard.number === card.number ? card : prevCard
+                    prevCard.suit === card.suit && prevCard.number === card.number && prevCard.cardType === card.cardType ? card : prevCard
                 )
                 return new Deck(newDeckCards)
             })
@@ -180,7 +180,7 @@ const CardsDeck: React.FC = () => {
                 <div className="absolute" style={{top: "47%", left: "49.25%"}}>
                     <fieldset className="border-2 rounded w-24 h-36">
                         <legend>Deck</legend>
-                        <div className="text-center">
+                        <div className="flex h-full items-center justify-center">
                             <IconButton onClick={handleDeckBoxClick}>
                                 <VisibilityOffIcon fontSize="large"/>
                             </IconButton>

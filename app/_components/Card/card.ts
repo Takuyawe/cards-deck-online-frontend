@@ -57,13 +57,13 @@ export class Card {
 
     getImage(): string {
         if (this.cardType === CardType.Joker1) {
-            return 'cards_images/joker.jpg';
+            return '/cards_images/joker.jpg';
         } else if (this.cardType === CardType.Joker2) {
-            return 'cards_images/joker2.jpg';
+            return '/cards_images/joker2.jpg';
         } else {
             const suitName = Suit[this.suit];
             const cardNumber = CardNumber[this.number];
-            return `cards_images/${suitName}-${cardNumber}.svg`;
+            return `/cards_images/${suitName}-${cardNumber}.svg`;
         }
     }
 

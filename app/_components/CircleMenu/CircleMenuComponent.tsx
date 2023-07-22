@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from 'react';
-import styled from 'styled-components';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -21,50 +20,17 @@ import MultiPlayerComponent from './MultiPlayerMenu/MultiPlayerMenu';
 import { usePathname, useRouter } from 'next/navigation';
 import { useSocketContext } from '@/app/_context/socket';
 
-const MenuContainerBox = styled(Box)`
-  position: absolute;
-  top: 0.1%;
-  left: 0.5%;
-`
+const menuList = "flex transition-max-x duration-700 ease-in-out overflow-hidden"
 
-const AnimatedList = styled(List)`
-  display: flex;
-  transition: max-width 0.75s ease-in-out;
-  overflow: hidden;
+const parentListItem = "max-w-[2.5rem] bg-gray-100 hover:bg-gray-300"
+const parentListItemOpen = "rounded-l-full rounded-r-none"
+const parentListItemClosed = "rounded-full transition-border-radius duration-100 ease-in-out delay-300"
 
-  &.closed {
-    max-width: 2.5rem; 
-  }
+const childListItem = "max-w-[2.5rem] bg-gray-100 hover:bg-gray-300 transition-all duration-700 ease-in-out"
+const childListItemOpen = "opacity-100 visible"
+const childListItemClosed = "opacity-0 invisible"
 
-  &.open {
-    max-width: 10rem;
-  }
-`;
-
-const AnimatedListItemMenu = styled(ListItem)`
-  &.closed {
-    transition: border-radius 0.1s ease-in-out;
-    transition-delay: 0.75s;
-    border-radius: 50%;
-  }
-
-  &.open {
-    border-radius: 50% 0 0 50%;
-  }
-`
-
-const AnimatedListItem = styled(ListItem)`
-  transition: opacity 0.75s ease-in-out, visibility 0.75s;
-  &.closed {
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  &.open {
-    opacity: 1;
-    visibility: visible;
-  }
-`;
+const itemButton = "p-0 h-10 w-10 items-center justify-center"
 
 export default function CicleMenuComponent () {
   const [openMultiPlayer, setOpenMultiPlayer] = useState(false)
@@ -95,58 +61,58 @@ export default function CicleMenuComponent () {
 
   return (
     <>
-      <MenuContainerBox>
-        <AnimatedList className={openSettings ? 'open' : 'closed'}>
-          <AnimatedListItemMenu disablePadding className={`bg-gray-100 hover:bg-gray-300 ${openSettings ? 'open' : 'closed'}`}>
-            <ListItemButton onClick={handleMenuClick} className='p-0 h-10 w-10 items-center justify-center'>
+      <Box className='absolute top-[0.1%] left-[0.5%]'>
+        <List className={`${menuList} ${openSettings ? 'max-w-[10rem]' : 'max-w-[2.5rem]'}`}>
+          <ListItem disablePadding className={`${parentListItem} ${openSettings ? parentListItemOpen : parentListItemClosed}`}>
+            <ListItemButton onClick={handleMenuClick} className={itemButton}>
               <ListItemIcon className='min-w-0'>
                 {openSettings ? <CloseRoundedIcon  /> : <MenuRoundedIcon />}
               </ListItemIcon>
             </ListItemButton>
-          </AnimatedListItemMenu>
+          </ListItem>
           
           <Tooltip title="Account">
-            <AnimatedListItem disablePadding className={`bg-gray-100 hover:bg-gray-300 ${openSettings ? 'open' : 'closed'}}`}>
-              <ListItemButton className='p-0 h-10 w-10 items-center justify-center'>
+            <ListItem disablePadding className={`${childListItem} ${openSettings ? childListItemOpen : childListItemClosed}`}>
+              <ListItemButton className={itemButton}>
                 <ListItemIcon className='min-w-0'>
                   <AccountCircleIcon color='success' />
                 </ListItemIcon>
               </ListItemButton>
-            </AnimatedListItem> 
+            </ListItem> 
           </Tooltip>
           <Tooltip title="Settings">
-            <AnimatedListItem disablePadding className={`bg-gray-100 hover:bg-gray-300 ${openSettings ? 'open' : 'closed'}}`}>
-              <ListItemButton onClick={handleSettingsClick} className='p-0 h-10 w-10 items-center justify-center'>
+            <ListItem disablePadding className={`${childListItem} ${openSettings ? childListItemOpen : childListItemClosed}`}>
+              <ListItemButton onClick={handleSettingsClick} className={itemButton}>
                 <ListItemIcon className='min-w-0'>
                   <SettingsIcon color='success' />
                 </ListItemIcon>
               </ListItemButton>
-            </AnimatedListItem> 
+            </ListItem> 
           </Tooltip>
           {pathname === "/" ? (
             <Tooltip title="MultiPlayer">
-              <AnimatedListItem disablePadding className={`bg-gray-100 hover:bg-gray-300 rounded-r-full ${openSettings ? 'open' : 'closed'}}`}>
-                <ListItemButton onClick={handleMultiPlayerOpen} className='p-0 h-10 w-10 items-center justify-center'>
+              <ListItem disablePadding className={`rounded-r-full ${childListItem} ${openSettings ? childListItemOpen : childListItemClosed}`}>
+                <ListItemButton onClick={handleMultiPlayerOpen} className={itemButton}>
                   <ListItemIcon className='min-w-0'>
                     <PeopleIcon color='success' />
                   </ListItemIcon>
                 </ListItemButton>
-              </AnimatedListItem> 
+              </ListItem> 
             </Tooltip>
           ) : (
             <Tooltip title="Leave">
-              <AnimatedListItem disablePadding className={`bg-gray-100 hover:bg-gray-300 rounded-r-full ${openSettings ? 'open' : 'closed'}}`}>
-                <ListItemButton onClick={handleLogoutClick} className='p-0 h-10 w-10 items-center justify-center'>
+              <ListItem disablePadding className={`rounded-r-full ${childListItem} ${openSettings ? childListItemOpen : childListItemClosed}`}>
+                <ListItemButton onClick={handleLogoutClick} className={itemButton}>
                   <ListItemIcon className='min-w-0'>
                     <LogoutIcon color='success' />
                   </ListItemIcon>
                 </ListItemButton>
-              </AnimatedListItem>
+              </ListItem>
             </Tooltip>
           )}
             
-        </AnimatedList>
-      </MenuContainerBox>
+        </List>
+      </Box>
       
 
       {openMultiPlayer && (

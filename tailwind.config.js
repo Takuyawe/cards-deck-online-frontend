@@ -13,7 +13,7 @@ module.exports = {
       padding: "2rem",
       screens: {
         "2xl": "1400px",
-      },
+      }
     },
     extend: {
       colors: {
@@ -49,6 +49,14 @@ module.exports = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        transitionProperty: {
+          'max-w': 'max-width',
+          'border-radius': 'border-radius',
+          "visibility": "visibility",
+        },
+        transitionDelay: {
+          '750': '750ms',
         },
       },
       borderRadius: {

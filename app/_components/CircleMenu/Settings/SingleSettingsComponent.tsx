@@ -69,15 +69,11 @@ const settingsList = [
     "Theme"
 ]
 
-interface Props {
-    roomId: string
-}
-
-export default function SettingsComponent (props: Props) {
-    const {socketRef, multiPlayerSettings, setMultiPlayerSettings} = useSocketContext()
+export default function SingleSettingsComponent () {
+    const {socketRef, singleModeSettings, setSingleModeSettings} = useSocketContext()
     const [selectedSetting, setSelectedSetting] = useState<string | null>("Game")
-    const [isJokerIncluded, setIsJokerIncluded] = useState(multiPlayerSettings.game.isJokerIncluded)
-    const [isShuffleEnabled, setIsShuffleEnabled] = useState(multiPlayerSettings.game.isShuffleEnabled)
+    const [isJokerIncluded, setIsJokerIncluded] = useState(singleModeSettings.game.isJokerIncluded)
+    const [isShuffleEnabled, setIsShuffleEnabled] = useState(singleModeSettings.game.isShuffleEnabled)
     const [isSaveSuccess, setIsSaveSuccess] = useState(false)
     const router = useRouter()
 
@@ -86,12 +82,12 @@ export default function SettingsComponent (props: Props) {
     }
 
     const handleSettingsCloseClick = () => {
-        router.push(`/${props.roomId}`)
+        router.push("/")
     }
 
     const handleCancelClick = () => {
-        setIsJokerIncluded(multiPlayerSettings.game.isJokerIncluded)
-        setIsShuffleEnabled(multiPlayerSettings.game.isShuffleEnabled)
+        setIsJokerIncluded(singleModeSettings.game.isJokerIncluded)
+        setIsShuffleEnabled(singleModeSettings.game.isShuffleEnabled)
     }
 
     const handleSettingsSave = () => {
@@ -101,8 +97,8 @@ export default function SettingsComponent (props: Props) {
             isJokerIncluded: isJokerIncluded,
             isShuffleEnabled: isShuffleEnabled
         })
-        setMultiPlayerSettings({
-            ...multiPlayerSettings,
+        setSingleModeSettings({
+            ...singleModeSettings,
             game: {
                 isJokerIncluded: isJokerIncluded,
                 isShuffleEnabled: isShuffleEnabled
@@ -116,8 +112,8 @@ export default function SettingsComponent (props: Props) {
             <SettingsContainer>
                 <SettingsHeader>
                     <Box>
-                        <Typography color="#ffffff" variant="h4">Settings for Room ID: {props.roomId}</Typography>
-                        <Typography color="#ffffff" variant="h6">Manage the settings for this room</Typography>                                                
+                        <Typography color="#ffffff" variant="h4">Settings</Typography>
+                        <Typography color="#ffffff" variant="h6">Manage your game settings</Typography>                                                
                     </Box>
                     <IconButton onClick={handleSettingsCloseClick} className="rounded-sm bg-red-600 hover:bg-red-800 mr-6 mb-8" sx={{color: "white"}}>
                         <CloseRoundedIcon fontSize="medium"/>
@@ -142,7 +138,7 @@ export default function SettingsComponent (props: Props) {
                         <Grid item xs={9}>
                             <SettingsContent>
                                 {selectedSetting === "Game" && (
-                                    <DeckSettingsComponent roomId={props.roomId} isJokerIncluded={isJokerIncluded} setIsJokerIncluded={setIsJokerIncluded} isShuffleEnabled={isShuffleEnabled} setIsShuffleEnabled={setIsShuffleEnabled} isSaveSuccess={isSaveSuccess} />    
+                                    <DeckSettingsComponent isJokerIncluded={isJokerIncluded} setIsJokerIncluded={setIsJokerIncluded} isShuffleEnabled={isShuffleEnabled} setIsShuffleEnabled={setIsShuffleEnabled} isSaveSuccess={isSaveSuccess} />    
                                 )}
                                 {selectedSetting === "Theme" && (
                                     <ThemeSettingsComponent />    

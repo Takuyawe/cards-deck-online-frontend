@@ -5,18 +5,18 @@ import { io, Socket } from 'socket.io-client';
 
 import { Deck } from "../_components/Card/card";
 
-interface MultiPlayerSettings {
+interface GameSettings {
     game: {
         isJokerIncluded: boolean,
         isShuffleEnabled: boolean
-    }
-}
-
-interface SingleModeSettings {
+    },
     theme: {
         tableColor: string,
         cardColor: string
-    },
+    }
+}
+
+interface AccountSettings {
     account: {
         userName: string,
         password: string,
@@ -24,18 +24,18 @@ interface SingleModeSettings {
     }
 }
 
-const defaultMultiPlayerSettings: MultiPlayerSettings = {
+const defaultGameSettings: GameSettings = {
     game: {
         isJokerIncluded: false,
         isShuffleEnabled: true
-    }
-}
-
-const defaultSingleModeSettings: SingleModeSettings = {
+    },
     theme: {
         tableColor: "green",
         cardColor: "blue"
-    },
+    }
+}
+
+const defaultAccountSettings: AccountSettings = {
     account: {
         userName: "",
         password: "",
@@ -47,10 +47,10 @@ interface ContextProps {
     socketRef: React.MutableRefObject<Socket | null>
     deck: Deck
     setDeck: React.Dispatch<React.SetStateAction<Deck>>
-    multiPlayerSettings: MultiPlayerSettings
-    setMultiPlayerSettings: React.Dispatch<React.SetStateAction<MultiPlayerSettings>>
-    singleModeSettings: SingleModeSettings
-    setSingleModeSettings: React.Dispatch<React.SetStateAction<SingleModeSettings>>
+    multiPlayerSettings: GameSettings
+    setMultiPlayerSettings: React.Dispatch<React.SetStateAction<GameSettings>>
+    singleModeSettings: GameSettings
+    setSingleModeSettings: React.Dispatch<React.SetStateAction<GameSettings>>
     isDeckBoxVisible: boolean
     setIsDeckBoxVisible: React.Dispatch<React.SetStateAction<boolean>>
     
@@ -60,8 +60,8 @@ const SocketContext = createContext<ContextProps | undefined>(undefined)
 
 export const SocketContextProvider: React.FC<{children: ReactNode}> = ({children}) => {
     const socketRef = useRef<Socket | null>(null)
-    const [multiPlayerSettings, setMultiPlayerSettings] = useState(defaultMultiPlayerSettings)
-    const [singleModeSettings, setSingleModeSettings] = useState(defaultSingleModeSettings)
+    const [multiPlayerSettings, setMultiPlayerSettings] = useState(defaultGameSettings)
+    const [singleModeSettings, setSingleModeSettings] = useState(defaultGameSettings)
     const [deck, setDeck] = useState(new Deck().shuffle());
     const [isDeckBoxVisible, setIsDeckBoxVisible] = useState(true)
 

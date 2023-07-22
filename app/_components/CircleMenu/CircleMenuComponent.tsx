@@ -81,8 +81,11 @@ export default function CicleMenuComponent () {
   }
 
   const handleSettingsClick = () => {
-    if (pathname === "/") return
-    router.push(`${pathname}/settings`)
+    if (pathname === "/"){
+      router.push("/settings")
+    } else {
+      router.push(`${pathname}/settings`)
+    }
   }
 
   const handleLogoutClick = () => {

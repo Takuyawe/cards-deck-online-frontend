@@ -1,6 +1,6 @@
 "use client"
 
-import {useEffect, useState, useCallback} from "react"
+import {useEffect, useState, useCallback, use} from "react"
 import Image from "next/image"
 import {Card, Deck} from "./card"
 import Draggable, {DraggableData, DraggableEvent} from "react-draggable"
@@ -16,19 +16,29 @@ const CardComponent: React.FC<{card: Card}> = ({ card }) => {
     const [rotation, setRotation] = useState(0);
     const [isNotDraggable, setIsNotDraggable] = useState(false)
     const {socketRef, setDeck} = useSocketContext()
-    // const [cardPosition, setCardPosition] = useState({x: 0, y: 0})
+    const [imgSize, setImgSize] = useState({width: 0, height: 0})
 
-    // useEffect(() => {
-    //     setCardPosition({x: window.innerWidth / 2, y: window.innerHeight / 2})
+    useEffect(() => {
+        const changeCardSize = () => {
+            switch (true) {
+                case window.innerWidth < 768:
+                    setImgSize({width: 50, height: 75})
+                    break;
+                case window.innerWidth < 1024:
+                    setImgSize({width: 62.5, height: 87.5})
+                    break;
+                default:
+                    setImgSize({width: 75, height: 100})
+                    break;
+            }
+        }
 
-    //     window.addEventListener("resize", () => {
-    //         setCardPosition({x: window.innerWidth / 2, y: window.innerHeight / 2})
-    //     }) 
-    // }, [])
+        changeCardSize()
 
-    // 821, 1440
-    // 410.5, 720
-    // 720, 410
+        window.addEventListener("resize", () => {
+            changeCardSize()
+        })
+    }, [])
 
     const handleMouseDown = (e: React.MouseEvent): void => {
         setDragStart({x: e.clientX, y: e.clientY});
@@ -97,13 +107,13 @@ const CardComponent: React.FC<{card: Card}> = ({ card }) => {
     }
     
     return (
-        <Draggable onStart={handleDragStart} onStop={handleDragStop} onDrag={handleDrag} disabled={isNotDraggable} position={card.position} >  
-            <div className="z-999 absolute top-1/2 left-1/2">
+        <Draggable onStart={handleDragStart} onStop={handleDragStop} onDrag={handleDrag} disabled={isNotDraggable} position={card.position}>  
+            <div className={`z-999 absolute top-1/2 left-1/2`}>
                 <div onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove} style={{ transform: `rotate(${rotation}deg)` }}>
                     {card.isFlipped ? (
-                        <Image src={card.getImage()} alt="Card Image" width={75} height={100} draggable={false}  />
+                        <Image src={card.getImage()} alt="Card Image" width={imgSize.width} height={imgSize.height} draggable={false} />
                     ) : (
-                        <Image src="/cards_images/back.jpg" alt="Card Image" width={75} height={100} draggable={false} />
+                        <Image src="/cards_images/back.jpg" alt="Card Image" width={imgSize.width} height={imgSize.height} draggable={false} />
                     )}
                 </div>
             </div>
@@ -177,8 +187,8 @@ const CardsDeck: React.FC = () => {
     return (
         <> 
             {isDeckBoxVisible && (
-                <div className="absolute" style={{top: "47%", left: "49.25%"}}>
-                    <fieldset className="border-2 rounded w-24 h-36">
+                <div className="absolute top-[47%] left-[49.25%] max-[580px]:left-[48.7%] max-[480px]:left-[48.3%] max-[380px]:left-[48.1%]">
+                    <fieldset className="border-2 rounded w-16 h-24 sm:w-16 sm:h-24 md:w-20 md:h-[7.5rem] lg:w-24 lg:h-36">
                         <legend>Deck</legend>
                         <div className="flex h-full items-center justify-center">
                             <IconButton onClick={handleDeckBoxClick}>

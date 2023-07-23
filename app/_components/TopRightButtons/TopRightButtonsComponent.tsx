@@ -49,7 +49,7 @@ export default function TopRightButtonsComponent () {
 
     return (
         <>
-            <Box position="absolute" top="1%" left={`${isDeckBoxVisible ? "94%" : "91.25%"}`} zIndex="999">
+            <Box position="absolute" top="1%" left={`${isDeckBoxVisible ? "94%" : "91.25%"}`}>
                 <List className='flex flex-row-reverse' disablePadding>
                     {Object.entries(buttonList).map(button => (
                         <Tooltip title={button[1].tooltip} key={button[1].tooltip}>
